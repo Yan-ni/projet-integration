@@ -4,6 +4,13 @@
   box-sizing: border-box;
 }
 
+:root {
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semiBold: 600;
+  --fw-bold: 700;
+}
+
 /************** Typography **************/
 @font-face {
   font-family: 'Barlow';
@@ -13,7 +20,7 @@
     url('fonts/Barlow/Barlow-Regular.woff') format('woff'),
     url('fonts/Barlow/Barlow-Regular.ttf') format('truetype'),
     url('fonts/Barlow/Barlow-Regular.svg#Barlow-Regular') format('svg');
-  font-weight: var(--fw-regular);
+  font-weight: 400;
   font-style: normal;
   font-display: swap;
 }
@@ -26,7 +33,7 @@
     url('fonts/Barlow/Barlow-Medium.woff') format('woff'),
     url('fonts/Barlow/Barlow-Medium.ttf') format('truetype'),
     url('fonts/Barlow/Barlow-Medium.svg#Barlow-Medium') format('svg');
-  font-weight: var(--fw-medium);
+  font-weight: 500;
   font-style: normal;
   font-display: swap;
 }
@@ -40,7 +47,7 @@
     url('fonts/Barlow/Barlow-SemiBold.woff') format('woff'),
     url('fonts/Barlow/Barlow-SemiBold.ttf') format('truetype'),
     url('fonts/Barlow/Barlow-SemiBold.svg#Barlow-SemiBold') format('svg');
-  font-weight: var(--fw-semiBold);
+  font-weight: 600;
   font-style: normal;
   font-display: swap;
 }
@@ -53,7 +60,7 @@
     url('fonts/Barlow/Barlow-Bold.woff') format('woff'),
     url('fonts/Barlow/Barlow-Bold.ttf') format('truetype'),
     url('fonts/Barlow/Barlow-Bold.svg#Barlow-Bold') format('svg');
-  font-weight: var(--fw-bold);
+  font-weight: 700;
   font-style: normal;
   font-display: swap;
 }
@@ -68,17 +75,45 @@ body {
 #root {
   width: 100%;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
-.app,
+header {
+  padding: 1rem;
+  box-shadow: rgba(165, 173, 179, 0.4) 1px 1px 6px 0px;
+}
+
+.logo {
+  font-size: 1.75rem;
+  font-weight: bold;
+}
+
+.logo span {
+  color: #32a89d;
+}
+
+main {
+  flex: 1;
+  display: flex;
+  flex-direction: row;
+}
+
+main > .content {
+  flex: 1;
+}
+
+main > .map {
+  flex: 2;
+}
+
 .map {
-  width: 100%;
   height: 100%;
 }
 
-:root {
-  --fw-regular: 400;
-  --fw-medium: 500;
-  --fw-semiBold: 600;
-  --fw-bold: 700;
+footer {
+  background-color: #000;
+  color: #fff;
+  padding: 1rem;
+  text-align: center;
 }
