@@ -1,5 +1,6 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { icon as LeafletIcon } from 'leaflet';
+import MarkerClusterGroup from 'react-leaflet-cluster';
 import etablissements from '../etablissements.json';
 
 const schoolIcon = LeafletIcon({
@@ -25,16 +26,10 @@ export default function Main() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        {etablissements.map((etablissement) => {
-          if (etablissement.fields.coordonnees !== undefined)
-            return (
-              <>
-                {/* <Marker
-                  position={etablissement.fields.coordonnees}
-                  key={etablissement.fields.etablissement_id_paysage}
-                >
-                  <Popup>{etablissement.fields.uo_lib}</Popup>
-                </Marker> */}
+        <MarkerClusterGroup disableClusteringAtZoom={14}>
+          {etablissements.map((etablissement) => {
+            if (etablissement.fields.coordonnees !== undefined)
+              return (
                 <Marker
                   position={etablissement.fields.coordonnees}
                   icon={schoolIcon}
@@ -42,10 +37,10 @@ export default function Main() {
                 >
                   <Popup>{etablissement.fields.uo_lib}</Popup>
                 </Marker>
-              </>
-            );
-          return null;
-        })}
+              );
+            return null;
+          })}
+        </MarkerClusterGroup>
       </MapContainer>
     </main>
   );
