@@ -1,11 +1,68 @@
 * {
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
+}
+
+/************** Typography **************/
+@font-face {
+  font-family: 'Barlow';
+  src: url('fonts/Barlow/Barlow-Regular.eot');
+  src: url('fonts/Barlow/Barlow-Regular.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Barlow/Barlow-Regular.woff2') format('woff2'),
+    url('fonts/Barlow/Barlow-Regular.woff') format('woff'),
+    url('fonts/Barlow/Barlow-Regular.ttf') format('truetype'),
+    url('fonts/Barlow/Barlow-Regular.svg#Barlow-Regular') format('svg');
+  font-weight: var(--fw-regular);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('fonts/Barlow/Barlow-Medium.eot');
+  src: url('fonts/Barlow/Barlow-Medium.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Barlow/Barlow-Medium.woff2') format('woff2'),
+    url('fonts/Barlow/Barlow-Medium.woff') format('woff'),
+    url('fonts/Barlow/Barlow-Medium.ttf') format('truetype'),
+    url('fonts/Barlow/Barlow-Medium.svg#Barlow-Medium') format('svg');
+  font-weight: var(--fw-medium);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('fonts/Barlow/Barlow-SemiBold.eot');
+  src: url('fonts/Barlow/Barlow-SemiBold.eot?#iefix')
+      format('embedded-opentype'),
+    url('fonts/Barlow/Barlow-SemiBold.woff2') format('woff2'),
+    url('fonts/Barlow/Barlow-SemiBold.woff') format('woff'),
+    url('fonts/Barlow/Barlow-SemiBold.ttf') format('truetype'),
+    url('fonts/Barlow/Barlow-SemiBold.svg#Barlow-SemiBold') format('svg');
+  font-weight: var(--fw-semiBold);
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('fonts/Barlow/Barlow-Bold.eot');
+  src: url('fonts/Barlow/Barlow-Bold.eot?#iefix') format('embedded-opentype'),
+    url('fonts/Barlow/Barlow-Bold.woff2') format('woff2'),
+    url('fonts/Barlow/Barlow-Bold.woff') format('woff'),
+    url('fonts/Barlow/Barlow-Bold.ttf') format('truetype'),
+    url('fonts/Barlow/Barlow-Bold.svg#Barlow-Bold') format('svg');
+  font-weight: var(--fw-bold);
+  font-style: normal;
+  font-display: swap;
 }
 
 body {
   width: 100vw;
   height: 100vh;
   overflow: hidden;
+  font-family: 'Barlow', serif;
 }
 
 #root {
@@ -17,4 +74,11 @@ body {
 .map {
   width: 100%;
   height: 100%;
+}
+
+:root {
+  --fw-regular: 400;
+  --fw-medium: 500;
+  --fw-semiBold: 600;
+  --fw-bold: 700;
 }
