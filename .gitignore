@@ -1,0 +1,14 @@
+# Code editor
+.vscode/
+
+# Node
+node_modules/
+
+# Environement variables
+*.env
+
+# Database
+*.sqlite
+
+# Production
+dist/
