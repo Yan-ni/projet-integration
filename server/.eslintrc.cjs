@@ -12,5 +12,6 @@ module.exports = {
   plugins: ['prettier'],
   rules: {
     'no-unused-vars': 0,
+    camelcase: 0,
   },
 };
