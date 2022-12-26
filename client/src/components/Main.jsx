@@ -1,7 +1,9 @@
 import { MapContainer, TileLayer, Marker, Popup } from 'react-leaflet';
 import { icon as LeafletIcon } from 'leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
-import etablissements from '../etablissements.json';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { v4 as uuidv4 } from 'uuid';
 
 const schoolIcon = LeafletIcon({
   iconUrl: new URL('../assets/school.png', import.meta.url).href,
@@ -11,6 +13,19 @@ const schoolIcon = LeafletIcon({
 });
 
 export default function Main() {
+  const [etablissements, setEtablissements] = useState([]);
+  useEffect(() => {
+    axios
+      .get('http://localhost:3000/api/etablissements')
+      .then((res) => {
+        const { data } = res;
+        setEtablissements(data);
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+  }, []);
+
   return (
     <main>
       <div className="content">
@@ -26,16 +41,16 @@ export default function Main() {
           attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
           url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
         />
-        <MarkerClusterGroup disableClusteringAtZoom={14}>
+        <MarkerClusterGroup disableClusteringAtZoom={14} key={uuidv4()}>
           {etablissements.map((etablissement) => {
-            if (etablissement.fields.coordonnees !== undefined)
+            if (etablissement.coordonnees !== undefined)
               return (
                 <Marker
-                  position={etablissement.fields.coordonnees}
+                  position={etablissement.coordonnees}
                   icon={schoolIcon}
-                  key={etablissement.fields.etablissement_id_paysage}
+                  key={etablissement.etablissement_id_paysage}
                 >
-                  <Popup>{etablissement.fields.uo_lib}</Popup>
+                  <Popup>{etablissement.uo_lib}</Popup>
                 </Marker>
               );
             return null;
