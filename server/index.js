@@ -4,7 +4,7 @@ const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 
-const { sequelize } = require('./models');
+const { sequelize } = require('./src/models');
 
 const app = express();
 
@@ -24,13 +24,12 @@ app.use(
 app.use(cors());
 app.use(morgan('common'));
 
-// routes
-app.use('/api', (req, res, next) => {
-  res.json({
-    message: 'hello world - api',
-  });
-});
+// api routes
+const routes = require('./src/routes');
 
+app.use('/api', routes);
+
+// view routes
 if (process.env.NODE_ENV === 'production') {
   const dist_path = path.resolve(__dirname, '..', 'client', 'dist');
 
