@@ -68,7 +68,7 @@
 body {
   width: 100vw;
   height: 100vh;
-  overflow: hidden;
+  /* overflow: hidden; */
   font-family: 'Barlow', serif;
 }
 
@@ -95,12 +95,50 @@ header {
 
 main {
   flex: 1;
+  overflow: auto;
   display: flex;
   flex-direction: row;
 }
 
-main > .content {
+main > .panel {
   flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.panel-control {
+  padding: 1rem;
+}
+
+input#search {
+  font-size: 1rem;
+  padding: 0.5rem 0.7rem;
+  border: 0;
+  border-radius: 50em;
+  box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
+}
+
+input#search ::placeholder {
+  color: #000;
+  opacity: 1;
+}
+
+.panel > .panel-data {
+  flex: 1;
+  overflow: scroll;
+}
+
+.panel-data li {
+  padding: 1rem;
+}
+
+.panel-data li:nth-child(2n) {
+  background-color: #eee;
+}
+
+.panel-data li:hover {
+  background: #ccc;
+  cursor: pointer;
 }
 
 main > .map {
