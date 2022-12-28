@@ -19,6 +19,8 @@ const loadAPIData = (setSchools) => () => {
 export default function Main() {
   const [schools, setSchools] = useState([]);
   const [displayedSchools, setDisplayedSchools] = useState(schools);
+  // const [zoom, setZoom] = useState(6);
+  const [map, setMap] = useState(null);
   // eslint-disable-next-line react-hooks/exhaustive-deps
   useEffect(loadAPIData(setSchools), []);
 
@@ -27,13 +29,19 @@ export default function Main() {
   return (
     <main>
       <div className="panel">
+        <button
+          type="button"
+          onClick={() => map?.setView([46.2276, 2.2137], 6)}
+        >
+          test
+        </button>
         <ControlPanel
           schools={schools}
           setDisplayedSchools={setDisplayedSchools}
         />
-        <DataPanel displayedSchools={displayedSchools} />
+        <DataPanel displayedSchools={displayedSchools} map={map} />
       </div>
-      <Map displayedSchools={displayedSchools} />
+      <Map displayedSchools={displayedSchools} setMap={setMap} />
     </main>
   );
 }

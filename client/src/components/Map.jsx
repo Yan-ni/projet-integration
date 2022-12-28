@@ -3,13 +3,14 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 import { v4 as uuidv4 } from 'uuid';
 import SchoolMarker from './SchoolMarker';
 
-export default function Map({ displayedSchools }) {
+export default function Map({ displayedSchools, setMap }) {
   return (
     <MapContainer
       className="map"
       center={[46.2276, 2.2137]}
       zoom={6}
       minZoom={3}
+      ref={setMap}
       worldCopyJump
     >
       <TileLayer
