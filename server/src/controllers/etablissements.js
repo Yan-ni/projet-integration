@@ -1,5 +1,14 @@
 const etablissements_data = require('../data/etablissements.json');
 
+const searchString = (string, searchPhrase) => {
+  if (string === undefined) return false;
+
+  const searchPhrase_lower = searchPhrase.toLocaleLowerCase();
+  const string_lower = string.toLowerCase();
+
+  return string_lower.search(searchPhrase_lower) !== -1;
+};
+
 module.exports = {
   get: (req, res, next) => {
     const {
@@ -67,41 +76,33 @@ module.exports = {
 
         if (search?.length)
           return !(
-            etablissement?.sigle
-              ?.toLocaleLowerCase()
-              .search(search.toLocaleLowerCase()) === -1 &&
-            etablissement?.uo_lib
-              ?.toLocaleLowerCase()
-              .search(search.toLocaleLowerCase()) === -1 &&
-            etablissement?.uo_lib_en
-              ?.toLocaleLowerCase()
-              .search(search.toLocaleLowerCase()) === -1 &&
-            etablissement?.uo_lib_officiel
-              ?.toLocaleLowerCase()
-              .search(search.toLocaleLowerCase()) === -1
+            !searchString(etablissement?.sigle, search) &&
+            !searchString(etablissement?.uo_lib, search) &&
+            !searchString(etablissement?.uo_lib_en, search) &&
+            !searchString(etablissement?.uo_lib_officiel, search)
           );
 
         return true;
       });
     else etablissements = etablissements_data;
 
-    // etablissements = etablissements.map(
-    //   ({
-    //     etablissement_id_paysage,
-    //     coordonnees,
-    //     sigle,
-    //     uo_lib,
-    //     uo_lib_officiel,
-    //     uo_lib_en,
-    //   }) => ({
-    //     etablissement_id_paysage,
-    //     coordonnees,
-    //     sigle,
-    //     uo_lib,
-    //     uo_lib_officiel,
-    //     uo_lib_en,
-    //   })
-    // );
+    etablissements = etablissements.map(
+      ({
+        etablissement_id_paysage,
+        coordonnees,
+        sigle,
+        uo_lib,
+        uo_lib_officiel,
+        uo_lib_en,
+      }) => ({
+        etablissement_id_paysage,
+        coordonnees,
+        sigle,
+        uo_lib,
+        uo_lib_officiel,
+        uo_lib_en,
+      })
+    );
 
     res.json(etablissements);
   },
