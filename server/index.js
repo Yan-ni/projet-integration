@@ -4,6 +4,8 @@ const cors = require('cors');
 const morgan = require('morgan');
 const path = require('path');
 const slowDown = require('express-slow-down');
+const swaggerUI = require('swagger-ui-express');
+const swaggerJsDoc = require('swagger-jsdoc');
 const { sequelize } = require('./src/models');
 
 const app = express();
@@ -41,12 +43,19 @@ app.use(morgan('common'));
 // parses incoming requests with JSON
 app.use(express.json());
 
-/* __________________________________ API routes __________________________________ */
+/* ____________________________________ routes ____________________________________ */
+// API documentation route
+const swaggerConfig = require('./src/config/swagger');
+
+const swaggerDocs = swaggerJsDoc(swaggerConfig);
+app.use('/api-docs', swaggerUI.serve, swaggerUI.setup(swaggerDocs));
+
+// API routes
 const routes = require('./src/routes');
 
 app.use('/api', routes);
 
-/* _________________________________ view routes __________________________________ */
+// view routes
 if (process.env.NODE_ENV === 'production') {
   const dist_path = path.resolve(__dirname, '..', 'client', 'dist');
 
