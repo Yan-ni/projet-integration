@@ -1,16 +1,8 @@
-const etablissements_data = require('../data/etablissements.json');
-
-const searchString = (string, searchPhrase) => {
-  if (string === undefined) return false;
-
-  const searchPhrase_lower = searchPhrase.toLocaleLowerCase();
-  const string_lower = string.toLowerCase();
-
-  return string_lower.search(searchPhrase_lower) !== -1;
-};
+const { Op } = require('sequelize');
+const { Etablissement } = require('../models');
 
 module.exports = {
-  get: (req, res, next) => {
+  get: async (req, res, next) => {
     const {
       search,
       type,
@@ -22,87 +14,25 @@ module.exports = {
       dateCreation,
     } = req.query;
 
-    let etablissements;
+    let where = {};
 
-    if (
-      search ||
-      type ||
-      secteur ||
-      pays ||
-      region ||
-      departement ||
-      commune ||
-      dateCreation
-    )
-      etablissements = etablissements_data.filter((etablissement) => {
-        if (
-          type?.length &&
-          etablissement?.type_d_etablissement?.toLowerCase() !==
-            type?.toLowerCase()
-        )
-          return false;
+    if (search?.trim().length)
+      where = {
+        [Op.or]: [
+          {
+            uo_lib: { [Op.like]: `%${search.trim()}%` },
+            sigle: { [Op.like]: `%${search.trim()}%` },
+          },
+        ],
+      };
+    if (type?.trim().length) where.type = type.trim().toLocaleLowerCase();
+    if (secteur?.trim().length)
+      where.secteur = secteur.trim().toLocaleLowerCase();
 
-        if (
-          secteur?.length &&
-          etablissement?.secteur_d_etablissement?.toLowerCase() !==
-            secteur?.toLowerCase()
-        )
-          return false;
-
-        if (
-          pays?.length &&
-          etablissement?.pays_etranger_acheminement?.toLowerCase() !==
-            pays?.toLowerCase()
-        )
-          return false;
-
-        if (
-          region?.length &&
-          etablissement?.reg_nom?.toLowerCase() !== region?.toLowerCase()
-        )
-          return false;
-
-        if (
-          departement?.length &&
-          etablissement?.dep_nom?.toLowerCase() !== departement?.toLowerCase()
-        )
-          return false;
-
-        if (
-          commune?.length &&
-          etablissement?.com_nom?.toLowerCase() !== commune?.toLowerCase()
-        )
-          return false;
-
-        if (search?.length)
-          return !(
-            !searchString(etablissement?.sigle, search) &&
-            !searchString(etablissement?.uo_lib, search) &&
-            !searchString(etablissement?.uo_lib_en, search) &&
-            !searchString(etablissement?.uo_lib_officiel, search)
-          );
-
-        return true;
-      });
-    else etablissements = etablissements_data;
-
-    etablissements = etablissements.map(
-      ({
-        etablissement_id_paysage,
-        coordonnees,
-        sigle,
-        uo_lib,
-        uo_lib_officiel,
-        uo_lib_en,
-      }) => ({
-        etablissement_id_paysage,
-        coordonnees,
-        sigle,
-        uo_lib,
-        uo_lib_officiel,
-        uo_lib_en,
-      })
-    );
+    const etablissements = await Etablissement.findAll({
+      attributes: ['id', 'latitude', 'longitude', 'sigle', 'uo_lib'],
+      where,
+    });
 
     res.json(etablissements);
   },
