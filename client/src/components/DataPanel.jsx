@@ -6,7 +6,7 @@ export default function DataPanel({ displayedSchools, map }) {
           // TODO: improve accessibility
           // eslint-disable-next-line jsx-a11y/no-noninteractive-element-interactions, jsx-a11y/click-events-have-key-events
           <li
-            key={school.etablissement_id_paysage}
+            key={school.id}
             onClick={() => map?.setView(school.coordonnees, 16)}
           >
             {school.sigle} - {school.uo_lib}

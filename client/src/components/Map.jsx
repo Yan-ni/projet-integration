@@ -19,10 +19,10 @@ export default function Map({ displayedSchools, setMap }) {
       />
       <MarkerClusterGroup disableClusteringAtZoom={14} key={uuidv4()}>
         {displayedSchools.map((school) => {
-          return school.coordonnees ? (
+          return school.latitude && school.longitude ? (
             <SchoolMarker
-              position={school.coordonnees}
-              key={school.etablissement_id_paysage}
+              position={[school.latitude, school.longitude]}
+              key={school.id}
             >
               <Popup>{school.uo_lib}</Popup>
             </SchoolMarker>
