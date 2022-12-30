@@ -3,7 +3,7 @@ import MarkerClusterGroup from 'react-leaflet-cluster';
 import { v4 as uuidv4 } from 'uuid';
 import SchoolMarker from './SchoolMarker';
 
-export default function Map({ displayedSchools, setMap }) {
+export default function Map({ schools, setMap }) {
   return (
     <MapContainer
       className="map"
@@ -18,7 +18,7 @@ export default function Map({ displayedSchools, setMap }) {
         url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
       />
       <MarkerClusterGroup disableClusteringAtZoom={14} key={uuidv4()}>
-        {displayedSchools.map((school) => {
+        {schools.map((school) => {
           return school.latitude && school.longitude ? (
             <SchoolMarker
               position={[school.latitude, school.longitude]}
