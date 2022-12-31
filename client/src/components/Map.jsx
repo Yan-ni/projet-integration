@@ -1,9 +1,14 @@
 import { MapContainer, TileLayer, Popup } from 'react-leaflet';
 import MarkerClusterGroup from 'react-leaflet-cluster';
 import { v4 as uuidv4 } from 'uuid';
+import { useEffect } from 'react';
 import SchoolMarker from './SchoolMarker';
 
 export default function Map({ schools, setMap }) {
+  useEffect(() => {
+    console.log('map changed');
+  }, []);
+
   return (
     <MapContainer
       className="map"

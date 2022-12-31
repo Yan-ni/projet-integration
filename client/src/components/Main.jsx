@@ -1,34 +1,25 @@
-import { useEffect, useState } from 'react';
-import axios from 'axios';
+import { useContext } from 'react';
+import { observer } from 'mobx-react';
 import Map from './Map';
 import ControlPanel from './ControlPanel';
 import DataPanel from './DataPanel';
 
-const loadAPIData = (setSchools) => () => {
-  axios
-    .get('http://localhost:3000/api/etablissements')
-    .then((res) => {
-      const { data } = res;
-      setSchools(data);
-    })
-    .catch((error) => {
-      console.error(error);
-    });
-};
-
-export default function Main() {
-  const [schools, setSchools] = useState([]);
-  const [map, setMap] = useState(null);
+function Main({ StoreContext }) {
+  const { mapStore, schoolStore } = useContext(StoreContext);
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  useEffect(loadAPIData(setSchools), []);
 
   return (
     <main>
       <div className="panel">
         <ControlPanel />
-        <DataPanel schools={schools} map={map} />
+        <DataPanel schools={schoolStore.schools} map={mapStore.map} />
       </div>
-      <Map schools={schools} setMap={setMap} />
+      <Map
+        schools={schoolStore.schools}
+        setMap={(map) => mapStore.setMap(map)}
+      />
     </main>
   );
 }
+
+export default observer(Main);
