@@ -18,12 +18,10 @@ module.exports = {
 
     if (search?.trim().length)
       where = {
-        [Op.or]: [
-          {
-            uo_lib: { [Op.like]: `%${search.trim()}%` },
-            sigle: { [Op.like]: `%${search.trim()}%` },
-          },
-        ],
+        [Op.or]: {
+          uo_lib: { [Op.like]: `%${search.trim()}%` },
+          sigle: { [Op.like]: `%${search.trim()}%` },
+        },
       };
     if (type?.trim().length) where.type = type.trim().toLocaleLowerCase();
     if (secteur?.trim().length)
