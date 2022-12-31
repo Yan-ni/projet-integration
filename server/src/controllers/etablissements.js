@@ -24,7 +24,21 @@ module.exports = {
             sequelize.Op.like,
             `%${search.trim().toLowerCase()}%`
           ),
-          { sigle: { [sequelize.Op.like]: `%${search.trim()}%` } },
+          sequelize.where(
+            sequelize.fn('lower', sequelize.col('uo_lib_officiel')),
+            sequelize.Op.like,
+            `%${search.trim().toLowerCase()}%`
+          ),
+          sequelize.where(
+            sequelize.fn('lower', sequelize.col('uo_lib_en')),
+            sequelize.Op.like,
+            `%${search.trim().toLowerCase()}%`
+          ),
+          sequelize.where(
+            sequelize.fn('lower', sequelize.col('sigle')),
+            sequelize.Op.like,
+            `%${search.trim().toLowerCase()}%`
+          ),
         ],
       };
     if (type?.trim().length) where.type = type.trim().toLocaleLowerCase();
