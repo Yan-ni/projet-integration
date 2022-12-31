@@ -6,9 +6,9 @@ class SchoolStore {
     makeObservable(this, {
       schools: observable,
       setSchools: action,
-      loadAPIData: action,
+      fetchData: action,
     });
-    this.loadAPIData();
+    this.fetchData();
   }
 
   schools = [];
@@ -17,9 +17,19 @@ class SchoolStore {
     this.schools = schools;
   }
 
-  loadAPIData() {
+  fetchData(params) {
+    const queryParams = [];
+    if (params)
+      Object.keys(params).forEach((key) =>
+        queryParams.push(`${key}=${params[key]}`)
+      );
+
     axios
-      .get('http://localhost:3000/api/etablissements')
+      .get(
+        `http://localhost:3000/api/etablissements${
+          queryParams.length ? `?${queryParams.join('&')}` : ''
+        }`
+      )
       .then((res) => {
         const { data } = res;
         this.setSchools(data);

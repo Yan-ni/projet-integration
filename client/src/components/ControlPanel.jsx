@@ -1,6 +1,6 @@
 import debounce from 'lodash.debounce';
 
-export default function ControlPanel() {
+export default function ControlPanel({ schoolStore }) {
   return (
     <div className="panel-control">
       <form
@@ -13,7 +13,10 @@ export default function ControlPanel() {
           name="search"
           type="text"
           placeholder="Rechercher"
-          onChange={debounce(() => () => {}, 500)}
+          onChange={debounce((e) => {
+            const search = e.target.value;
+            schoolStore.fetchData({ search });
+          }, 500)}
         />
       </form>
     </div>
