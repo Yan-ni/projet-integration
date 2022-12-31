@@ -1,4 +1,4 @@
-const { Op } = require('sequelize');
+const sequelize = require('sequelize');
 const { Etablissement } = require('../models');
 
 module.exports = {
@@ -18,10 +18,14 @@ module.exports = {
 
     if (search?.trim().length)
       where = {
-        [Op.or]: {
-          uo_lib: { [Op.like]: `%${search.trim()}%` },
-          sigle: { [Op.like]: `%${search.trim()}%` },
-        },
+        [sequelize.Op.or]: [
+          sequelize.where(
+            sequelize.fn('lower', sequelize.col('uo_lib')),
+            sequelize.Op.like,
+            `%${search.trim().toLowerCase()}%`
+          ),
+          { sigle: { [sequelize.Op.like]: `%${search.trim()}%` } },
+        ],
       };
     if (type?.trim().length) where.type = type.trim().toLocaleLowerCase();
     if (secteur?.trim().length)
