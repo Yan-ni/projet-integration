@@ -79,5 +79,6 @@ const router = express.Router();
  *                     type: string
  */
 router.get('/etablissements', controllers.etablissements.get);
+router.get('/etablissement/:id', controllers.etablissement.get);
 
 module.exports = router;
