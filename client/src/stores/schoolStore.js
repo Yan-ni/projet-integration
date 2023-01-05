@@ -1,20 +1,39 @@
-import { makeObservable, observable, action } from 'mobx';
+import { makeObservable, observable, action, runInAction } from 'mobx';
 import axios from 'axios';
 
 class SchoolStore {
   constructor() {
     makeObservable(this, {
+      selectedSchool: observable,
       schools: observable,
       setSchools: action,
       fetchData: action,
+      setSelectedSchool: action,
+      unselectSchool: action,
     });
     this.fetchData();
   }
 
   schools = [];
 
+  selectedSchool = null;
+
   setSchools(schools) {
     this.schools = schools;
+  }
+
+  setSelectedSchool(id) {
+    axios
+      .get(`http://localhost:3000/api/etablissement/${id}`)
+      .then(({ data }) =>
+        runInAction(() => {
+          this.selectedSchool = data;
+        })
+      );
+  }
+
+  unselectSchool() {
+    this.selectedSchool = null;
   }
 
   fetchData(params) {
@@ -30,13 +49,8 @@ class SchoolStore {
           queryParams.length ? `?${queryParams.join('&')}` : ''
         }`
       )
-      .then((res) => {
-        const { data } = res;
-        this.setSchools(data);
-      })
-      .catch((error) => {
-        console.error(error);
-      });
+      .then(({ data }) => this.setSchools(data))
+      .catch((error) => console.error(error));
   }
 }
 

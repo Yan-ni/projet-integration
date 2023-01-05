@@ -1,4 +1,3 @@
-import { observer } from 'mobx-react';
 import { createContext, useMemo } from 'react';
 import Header from './components/Header';
 import Main from './components/Main';
@@ -20,4 +19,4 @@ function App() {
   );
 }
 
-export default observer(App);
+export default App;
