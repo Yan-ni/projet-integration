@@ -1,5 +1,6 @@
 import { makeObservable, observable, action, runInAction } from 'mobx';
 import axios from 'axios';
+import API_URL from '../config/apiUrl';
 
 class SchoolStore {
   constructor() {
@@ -23,13 +24,11 @@ class SchoolStore {
   }
 
   setSelectedSchool(id) {
-    axios
-      .get(`http://localhost:3000/api/etablissement/${id}`)
-      .then(({ data }) =>
-        runInAction(() => {
-          this.selectedSchool = data;
-        })
-      );
+    axios.get(`${API_URL}/api/etablissement/${id}`).then(({ data }) =>
+      runInAction(() => {
+        this.selectedSchool = data;
+      })
+    );
   }
 
   unselectSchool() {
@@ -45,7 +44,7 @@ class SchoolStore {
 
     axios
       .get(
-        `http://localhost:3000/api/etablissements${
+        `${API_URL}/api/etablissements${
           queryParams.length ? `?${queryParams.join('&')}` : ''
         }`
       )
