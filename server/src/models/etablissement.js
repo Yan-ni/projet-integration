@@ -33,7 +33,12 @@ module.exports = (sequelize, DataTypes) => {
     },
 
     type: {
-      type: DataTypes.ENUM('université', 'école', 'autre établissement'),
+      type: DataTypes.ENUM(
+        'université',
+        'école',
+        'grand établissement',
+        'autre établissement'
+      ),
       allowNull: false,
     },
     secteur: {
