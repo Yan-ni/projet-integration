@@ -73,8 +73,9 @@ module.exports = {
 
       try {
         await Etablissement.create(etablissement);
-      } catch (error) {
+      } catch ({ errors }) {
         console.error(`couldn't add school of id : ${etablissement.id}`);
+        console.log(errors?.map((error) => ` -> ${error.message}`).join('\n'));
         continue;
       }
 
