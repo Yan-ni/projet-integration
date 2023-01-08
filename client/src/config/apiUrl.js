@@ -3,7 +3,7 @@ const config = {
     API_URL: 'http://localhost:3000',
   },
   production: {
-    API_URL: 'https://pi.aniskh.com',
+    API_URL: '',
   },
 };
 
