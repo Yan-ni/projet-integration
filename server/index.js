@@ -69,12 +69,9 @@ if (process.env.NODE_ENV === 'production') {
 /* _________________________________ start server _________________________________ */
 const PORT = process.env.PORT || 3000;
 
-const seed = require('./src/seeds');
-
 sequelize
   .sync({ force: false })
   .then(() => sequelize.authenticate())
-  // .then(() => seed())
   .then(() =>
     app.listen(PORT, () => console.log(`app running on port : ${PORT}`))
   );
