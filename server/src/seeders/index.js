@@ -59,7 +59,7 @@ module.exports = {
         url_en,
         wikipedia_url: wikipedia,
         wikipedia_url_en: wikipedia_en,
-        faebook_url: compte_facebook,
+        facebook_url: compte_facebook,
         instagram_url: compte_instagram,
         twitter_url: compte_twitter,
         youtube_url: compte_youtube,

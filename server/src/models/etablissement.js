@@ -64,7 +64,7 @@ module.exports = (sequelize, DataTypes) => {
     wikipedia_url_en: {
       type: DataTypes.STRING,
     },
-    faebook_url: {
+    facebook_url: {
       type: DataTypes.STRING,
     },
     instagram_url: {
