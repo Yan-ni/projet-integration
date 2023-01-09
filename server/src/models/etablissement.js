@@ -96,5 +96,8 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
+  Etablissement.associate = ({ Effectif }) =>
+    Etablissement.hasMany(Effectif, { foreignKey: 'id_etablissement' });
+
   return Etablissement;
 };

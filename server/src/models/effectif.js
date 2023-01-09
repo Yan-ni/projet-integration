@@ -14,8 +14,5 @@ module.exports = (sequelize, DataTypes) => {
     },
   });
 
-  Effectif.associate = ({ Etablissement }) =>
-    Effectif.belongsTo(Etablissement, { foreignKey: 'id_etablissement' });
-
   return Effectif;
 };
