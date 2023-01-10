@@ -122,11 +122,34 @@ main > .panel {
   width: 100%;
   opacity: 0;
   transition: opacity 800ms ease;
+  padding: 1rem;
 }
 
 .panel .selected-school.show {
-  /* left: 0; */
   opacity: 1;
+}
+
+.panel .selected-school .links {
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.panel .selected-school .links a {
+  display: block;
+  width: fit-content;
+  transition: scale 300ms ease;
+}
+
+.panel .selected-school .links a:hover {
+  scale: 1.12;
+}
+
+.panel .selected-school .links img {
+  width: 45px;
+  aspect-ratio: 1;
 }
 
 .panel-control {
