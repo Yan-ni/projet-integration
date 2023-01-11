@@ -83,6 +83,7 @@ body {
 header {
   padding: 1rem;
   box-shadow: rgba(165, 173, 179, 0.4) 1px 1px 6px 0px;
+  z-index: 1;
 }
 
 .logo {
