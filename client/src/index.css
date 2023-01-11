@@ -123,6 +123,7 @@ main > .panel {
   opacity: 0;
   transition: opacity 800ms ease;
   padding: 1rem;
+  overflow: scroll;
 }
 
 .panel .selected-school.show {
