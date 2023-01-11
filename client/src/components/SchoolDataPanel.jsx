@@ -1,3 +1,4 @@
+import { Chart } from 'react-google-charts';
 import LinksIcons from './LinksIcons';
 
 export default function SchoolDataPanel({ mapStore, schoolStore }) {
@@ -27,6 +28,20 @@ export default function SchoolDataPanel({ mapStore, schoolStore }) {
           <br />
           <p>siret : {selectedSchool.siret}</p>
           <p>siren : {selectedSchool.siren}</p>
+          {selectedSchool.Effectifs.length !== 0 && (
+            <Chart
+              chartType="Bar"
+              width="100%"
+              height="400px"
+              data={[
+                ['Année', 'Effectifs'],
+                ...selectedSchool.Effectifs.map(({ annee, nombre }) => [
+                  String(annee),
+                  nombre,
+                ]),
+              ]}
+            />
+          )}
           <LinksIcons
             links={
               /* filter the object and leaves only entries with _url in the key */
