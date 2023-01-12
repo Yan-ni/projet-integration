@@ -1,5 +1,6 @@
 import { Chart } from 'react-google-charts';
 import LinksIcons from './LinksIcons';
+import BackArrowNavigation from '../assets/back-arrow-navigation.svg';
 
 export default function SchoolDataPanel({ mapStore, schoolStore }) {
   const { selectedSchool } = schoolStore;
@@ -15,7 +16,7 @@ export default function SchoolDataPanel({ mapStore, schoolStore }) {
               schoolStore.unselectSchool();
             }}
           >
-            close
+            <img src={BackArrowNavigation} alt="go back" />
           </button>
           <h2>{selectedSchool.uo_lib}</h2>
           <p>EN : {selectedSchool.uo_lib_en}</p>
