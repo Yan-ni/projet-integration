@@ -1,4 +1,5 @@
 import debounce from 'lodash.debounce';
+import FilterModal from './FilterModal.jsx';
 
 export default function ControlPanel({ schoolStore }) {
   return (
@@ -19,6 +20,7 @@ export default function ControlPanel({ schoolStore }) {
           }, 500)}
         />
       </form>
+      <FilterModal />
     </div>
   );
 }

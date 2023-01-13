@@ -17,6 +17,9 @@ function Main({ StoreContext }) {
         <SchoolDataPanel mapStore={mapStore} schoolStore={schoolStore} />
 
         <ControlPanel schoolStore={schoolStore} />
+        
+        
+        
         <DataPanel schoolStore={schoolStore} map={mapStore.map} />
       </div>
       <Map
