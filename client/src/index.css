@@ -178,17 +178,31 @@ main > .panel {
   padding: 1rem;
 }
 
-input#search {
+.panel-control form {
+  display: flex;
+  gap: 10px;
+}
+
+.panel-control input#search {
+  flex: 1;
   font-size: 1rem;
   padding: 0.5rem 0.7rem;
   border: 0;
-  border-radius: 50em;
+  border-radius: 5px;
   box-shadow: 0 0 10px 1px rgba(0, 0, 0, 0.2);
 }
 
-input#search ::placeholder {
+.panel-control input#search ::placeholder {
   color: #000;
   opacity: 1;
+}
+
+.panel-control button {
+  padding: 0.3rem;
+}
+
+.panel-control button img {
+  width: 25px;
 }
 
 .modal-overlay {

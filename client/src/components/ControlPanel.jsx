@@ -1,7 +1,11 @@
+import { useState } from 'react';
 import debounce from 'lodash.debounce';
-import FilterModal from './FilterModal.jsx';
+import FilterModal from './FilterModal';
+import filterIcon from '../assets/filter.svg';
 
 export default function ControlPanel({ schoolStore }) {
+  const [isOpen, setIsOpen] = useState(false);
+
   return (
     <div className="panel-control">
       <form
@@ -19,8 +23,11 @@ export default function ControlPanel({ schoolStore }) {
             schoolStore.fetchData({ search });
           }, 500)}
         />
+        <button type="button" onClick={() => setIsOpen(true)}>
+          <img src={filterIcon} alt="" />
+        </button>
       </form>
-      <FilterModal />
+      {isOpen && <FilterModal setIsOpen={setIsOpen} />}
     </div>
   );
 }
