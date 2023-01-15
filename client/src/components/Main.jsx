@@ -7,7 +7,6 @@ import SchoolDataPanel from './SchoolDataPanel';
 
 function Main({ StoreContext }) {
   const { mapStore, schoolStore } = useContext(StoreContext);
-  // eslint-disable-next-line react-hooks/exhaustive-deps
 
   const { selectedSchool } = schoolStore;
 
@@ -17,9 +16,7 @@ function Main({ StoreContext }) {
         <SchoolDataPanel mapStore={mapStore} schoolStore={schoolStore} />
 
         <ControlPanel schoolStore={schoolStore} />
-        
-        
-        
+
         <DataPanel schoolStore={schoolStore} map={mapStore.map} />
       </div>
       <Map
