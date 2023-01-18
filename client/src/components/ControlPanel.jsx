@@ -3,7 +3,7 @@ import debounce from 'lodash.debounce';
 import FilterModal from './FilterModal';
 import filterIcon from '../assets/filter.svg';
 
-export default function ControlPanel({ schoolStore }) {
+export default function ControlPanel({ schoolStore, filterStore }) {
   const [isOpen, setIsOpen] = useState(false);
 
   return (
@@ -27,7 +27,9 @@ export default function ControlPanel({ schoolStore }) {
           <img src={filterIcon} alt="" />
         </button>
       </form>
-      {isOpen && <FilterModal setIsOpen={setIsOpen} />}
+      {isOpen && (
+        <FilterModal filterStore={filterStore} setIsOpen={setIsOpen} />
+      )}
     </div>
   );
 }

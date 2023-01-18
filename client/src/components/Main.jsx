@@ -6,7 +6,7 @@ import DataPanel from './DataPanel';
 import SchoolDataPanel from './SchoolDataPanel';
 
 function Main({ StoreContext }) {
-  const { mapStore, schoolStore } = useContext(StoreContext);
+  const { mapStore, schoolStore, filterStore } = useContext(StoreContext);
 
   const { selectedSchool } = schoolStore;
 
@@ -15,7 +15,7 @@ function Main({ StoreContext }) {
       <div className={`panel ${selectedSchool && 'hide'}`}>
         <SchoolDataPanel mapStore={mapStore} schoolStore={schoolStore} />
 
-        <ControlPanel schoolStore={schoolStore} />
+        <ControlPanel schoolStore={schoolStore} filterStore={filterStore} />
 
         <DataPanel schoolStore={schoolStore} map={mapStore.map} />
       </div>
