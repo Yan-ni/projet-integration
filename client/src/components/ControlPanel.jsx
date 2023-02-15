@@ -28,7 +28,7 @@ export default function ControlPanel({ schoolStore, filterStore }) {
         </button>
       </form>
       {isOpen && (
-        <FilterModal filterStore={filterStore} setIsOpen={setIsOpen} />
+        <FilterModal schoolStore={schoolStore} filterStore={filterStore} setIsOpen={setIsOpen} />
       )}
     </div>
   );
