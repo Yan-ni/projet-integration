@@ -6,7 +6,7 @@ export default function SchoolDataPanel({ mapStore, schoolStore }) {
   const { selectedSchool } = schoolStore;
 
   return (
-    <div className={`selected-school ${selectedSchool && 'show'}`}>
+    <div className={`selected-school ${selectedSchool ? 'show' : 'hide'}`}>
       {selectedSchool && (
         <>
           <button
@@ -19,10 +19,14 @@ export default function SchoolDataPanel({ mapStore, schoolStore }) {
             <img src={BackArrowNavigation} alt="go back" />
           </button>
           <h2>{selectedSchool.uo_lib}</h2>
+          <p>
+            {selectedSchool.annee_creation} -
+            {selectedSchool.annee_femeture || " aujourd'hui"}
+          </p>
+
           <p>EN : {selectedSchool.uo_lib_en}</p>
           <p>sigle : {selectedSchool.sigle}</p>
           <br />
-          <p>année de création : {selectedSchool.annee_creation}</p>
           <br />
           <p>type : {selectedSchool.type}</p>
           <p>secteur : {selectedSchool.secteur}</p>

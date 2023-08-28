@@ -12,7 +12,7 @@ export default function DataPanel({ schoolStore, map }) {
               schoolStore.setSelectedSchool(school.id);
             }}
           >
-            {school.sigle} - {school.uo_lib}
+            {school.uo_lib}
           </li>
         ))}
       </ul>
